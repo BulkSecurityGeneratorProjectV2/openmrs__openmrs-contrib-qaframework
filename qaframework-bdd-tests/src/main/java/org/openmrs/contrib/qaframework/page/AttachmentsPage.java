@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.Writer;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import java.util.List;
 
 import org.apache.commons.io.IOUtils;
@@ -82,7 +83,7 @@ public class AttachmentsPage extends Page {
 	}
 
 	private String createTemporaryFile() throws IOException {
-		File tempFile = File.createTempFile("file", ".pdf");
+		File tempFile = Files.createTempFile("file", ".pdf").toFile();
 		tempFile.deleteOnExit();
 		try (InputStream pdf = getClass().getClassLoader().getResourceAsStream("data/file.pdf")) {
 			try (Writer writer = new FileWriter(tempFile)) {
